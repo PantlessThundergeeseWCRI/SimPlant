@@ -11,10 +11,13 @@ import LowerContainer from '../lowerContainer/lowerContainer.jsx';
 //render form container componenet
 
 function MainPage() {
+  // Keep track of selected room in state to pass to room component
+  const [selectedRoom, setSelectedRoom] = React.useState('');
+
   return (
     <div className="page">
-      <RoomMenu />
-      <LowerContainer />
+      <RoomMenu setSelectedRoom={setSelectedRoom} />
+      <LowerContainer selectedRoom={selectedRoom} />
     </div>
   );
 }
