@@ -2,9 +2,18 @@ import React from 'react';
 import './formContainerStyle.scss';
 
 export default function FormContainer() {
+  // On submit, send a POST request to the server with the form data
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    for (const value of data.values()) {
+      console.log('value: ', value);
+    }
+  };
+
   return (
     <div className="formContainer">
-      <form className="roomForm">
+      <form className="roomForm" onSubmit={handleSubmit}>
         <div className="formTitle">ADD ROOM</div>
         <input
           className="inputField"
