@@ -30,6 +30,9 @@ export default function FormContainer(props) {
       body: JSON.stringify(newRoomBody),
       });
 
+    // Reset form
+    event.target.reset();
+
     // Reload rooms
     setRooms(rooms.concat([newRoomBody]));
     setSelectedRoom(newRoomBody.room_name);
@@ -74,6 +77,11 @@ export default function FormContainer(props) {
       }
       return room;
     });
+
+    // Clear form
+    event.target.reset();
+
+    // Update rooms state
     setRooms(newRooms);
   };
 
