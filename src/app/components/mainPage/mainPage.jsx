@@ -14,19 +14,27 @@ function MainPage(props) {
   const { user } = props;
   const [rooms, setRooms] = React.useState([]);
 
-  useEffect( async () => {
-    const response = await fetch(`http://localhost:3000/users/${user}`);
-    const data = await response.json();
-    setRooms(data.room);
+  // Fetch rooms from database
+  useEffect( () => {
+    async function fetchData() {
+      const response = await fetch(`http://localhost:3000/users/${user}`);
+      const data = await response.json();
+      return data;
+    }
+    fetchData()
+      .then((data) => {
+        setRooms(data.rooms);
+      }
+    );
   }, []);
-  console.log("rooms", rooms);
+  
   // Keep track of selected room in state to pass to room component
   const [selectedRoom, setSelectedRoom] = React.useState('');
 
   return (
     <div className="page">
-      <RoomMenu setSelectedRoom={setSelectedRoom} />
-      <LowerContainer selectedRoom={selectedRoom} />
+      <RoomMenu rooms={rooms} setSelectedRoom={setSelectedRoom} />
+      <LowerContainer rooms={rooms} selectedRoom={selectedRoom} />
     </div>
   );
 }
