@@ -13,7 +13,8 @@ import LowerContainer from '../lowerContainer/lowerContainer.jsx';
 function MainPage(props) {
   const { user } = props;
   const [rooms, setRooms] = React.useState([]);
-  console.log('rooms', rooms);
+  // Keep track of selected room in state to pass to room component
+  const [selectedRoom, setSelectedRoom] = React.useState('');
 
   // Fetch rooms from database
   async function fetchData() {
@@ -32,8 +33,14 @@ function MainPage(props) {
     loadRooms();
   }, []);
   
-  // Keep track of selected room in state to pass to room component
-  const [selectedRoom, setSelectedRoom] = React.useState('');
+  useEffect(() => {
+    // Set initial value of selectedRoom to first room in rooms array
+    if (rooms.length > 0) {
+      console.log('new useEffect reached');
+      console.log('rooms[0]: ', rooms[0]);
+      setSelectedRoom(rooms[0].room_name);
+    }
+  }, [rooms]);
 
   return (
     <div className="page">

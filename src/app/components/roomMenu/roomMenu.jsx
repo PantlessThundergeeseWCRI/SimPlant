@@ -3,10 +3,11 @@ import './roomMenuStyle.scss';
 import { useState, useEffect } from 'react';
 
 export default function RoomMenu(props) {
-  const { rooms, selectedRoom } = props;
+  const { rooms, selectedRoom, setSelectedRoom } = props;
+
   // When a room is selected, set selectedRoom in state
   const handleSelection = (event) => {
-    props.setSelectedRoom(event.target.value);
+    setSelectedRoom(event.target.value);
   };
 
   console.log('rooms in roomMenu', rooms);
