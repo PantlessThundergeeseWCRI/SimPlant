@@ -36,7 +36,7 @@ function App() {
           // })()
           <div id="app">
             <Header />
-            <MainPage />
+            <MainPage user={user}/>
           </div>
         } />
         <Route path="/signup" element={

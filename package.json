@@ -7,7 +7,7 @@
     "test": "jest",
     "start": "NODE_ENV=production nodemon src/server/server.js",
     "build": "webpack",
-    "dev": "NODE_ENV=development webpack serve --open & nodemon src/server/server.js"
+    "dev": "concurrently \"cross-env NODE_ENV=development webpack serve --open\"  \"nodemon src/server/server.js\""
   },
   "repository": {
     "type": "git",
