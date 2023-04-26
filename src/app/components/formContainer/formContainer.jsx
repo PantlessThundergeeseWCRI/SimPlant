@@ -48,32 +48,32 @@ export default function FormContainer() {
         <FormSelect name="plantWatering" property="Watering"/>
         <div className="schedule">
           <div>
-            <label htmlFor="">Mon</label>
-            <input type="checkbox" name="Mon" value="Mon"></input>
+            <label htmlFor="Mon">Mon</label>
+            <input type="checkbox" id="Mon" name="Mon" value="Mon"></input>
           </div>
           <div>
-            <label htmlFor="">Tue</label>
-            <input type="checkbox" name="Tue" value="Tue"></input>
+            <label htmlFor="Tue">Tue</label>
+            <input type="checkbox" id="Tue" name="Tue" value="Tue"></input>
           </div>
           <div>
-            <label htmlFor="">Wed</label>
-            <input type="checkbox" name="Wed" value="Wed"></input>
+            <label htmlFor="Wed">Wed</label>
+            <input type="checkbox" id="Wed" name="Wed" value="Wed"></input>
           </div>
           <div>
-            <label htmlFor="">Thur</label>
-            <input type="checkbox" name="Thur" value="Thur"></input>
+            <label htmlFor="Thur">Thur</label>
+            <input type="checkbox" id="Thur" name="Thur" value="Thur"></input>
           </div>
           <div>
-            <label htmlFor="">Fri</label>
-            <input type="checkbox" name="Fri" value="Fri"></input>
+            <label htmlFor="Fri">Fri</label>
+            <input type="checkbox" id="Fri" name="Fri" value="Fri"></input>
           </div>
           <div>
-            <label htmlFor="">Sat</label>
-            <input type="checkbox" name="Sat" value="Sat"></input>
+            <label htmlFor="Sat">Sat</label>
+            <input type="checkbox" id="Sat" name="Sat" value="Sat"></input>
           </div>
           <div>
-            <label htmlFor="">Sun</label>
-            <input type="checkbox" name="Sun" value="Sun"></input>
+            <label htmlFor="Sun">Sun</label>
+            <input type="checkbox" id="Sun" name="Sun" value="Sun"></input>
           </div>
         </div>
         <button type="submit">Submit</button>
