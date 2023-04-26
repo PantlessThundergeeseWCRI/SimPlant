@@ -3,7 +3,16 @@ import './formContainerStyle.scss';
 
 export default function FormContainer() {
   // On submit, send a POST request to the server with the form data
-  const handleSubmit = (event) => {
+  // TODO edit these
+  const handleRoomSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.target);
+    for (const value of data.values()) {
+      console.log('value: ', value);
+    }
+  };
+
+  const handlePlantSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
     for (const value of data.values()) {
@@ -13,7 +22,7 @@ export default function FormContainer() {
 
   return (
     <div className="formContainer">
-      <form className="roomForm" onSubmit={handleSubmit}>
+      <form className="roomForm" onSubmit={handleRoomSubmit}>
         <div className="formTitle">ADD ROOM</div>
         <input
           className="inputField"
@@ -40,7 +49,7 @@ export default function FormContainer() {
         </select>
         <button type="submit">Submit</button>
       </form>
-      <form className="plantForm">
+      <form className="plantForm" onSubmit={handlePlantSubmit}>
         <div className="formTitle">ADD PLANT</div>
         <input
           name="plantSpecies"
