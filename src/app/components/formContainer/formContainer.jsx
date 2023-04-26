@@ -3,7 +3,7 @@ import FormSelect from './FormSelect';
 import './formContainerStyle.scss';
 
 export default function FormContainer(props) {
-  const { user, roomName, rooms, setRooms } = props;
+  const { user, roomName, rooms, setRooms, setSelectedRoom } = props;
   console.log('rooms', rooms);
   console.log('room name', roomName);
   // On submit, send a POST request to the server with the form data
@@ -32,6 +32,7 @@ export default function FormContainer(props) {
 
     // Reload rooms
     setRooms(rooms.concat([newRoomBody]));
+    setSelectedRoom(newRoomBody.room_name);
     };
   
 
