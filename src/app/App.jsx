@@ -14,6 +14,39 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+<<<<<<< HEAD
+        <Route path="/"  element={
+          // (() => {
+          //   // if user is not logged in, load Login component to require login
+          //   if (!loggedIn) {
+          //     return (
+          //       <>
+          //         <Header />
+          //         <Login setLoggedIn={setLoggedIn} />
+          //       </>
+          //     )
+          //   } else {
+          //     // if user is logged in, display homepage
+          //     return (
+          //       <div id="app">
+          //         <Header />
+          //         <MainPage />
+          //       </div>
+          //     );
+          //   }
+          // })()
+          <div id="app">
+            <Header />
+            <MainPage user={user}/>
+          </div>
+        } />
+        <Route path="/signup" element={
+          <>
+            <Header />
+            <Signup />
+          </>
+        } />
+=======
         <Route
           path="/"
           element={
@@ -51,6 +84,7 @@ function App() {
             </>
           }
         />
+>>>>>>> ba09e9dff2f0e8bcf349fd3ba39224b085879618
       </Routes>
     </BrowserRouter>
   );
