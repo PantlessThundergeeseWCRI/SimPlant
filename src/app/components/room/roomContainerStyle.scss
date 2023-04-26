@@ -3,6 +3,7 @@
   background-color: $primaryWhite_opacity10;
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
   width: 50%;
   height: 70%;
   border: 3px solid $darkPrimary;
@@ -11,4 +12,10 @@
   margin-right: 4rem;
   margin-top: 2rem;
   box-shadow: 0 2px 8px 1px $shadow;
+}
+
+#roomContainer > * {
+  flex-basis: 24%;
+  box-sizing: border-box;
+  padding: 1rem;
 }
