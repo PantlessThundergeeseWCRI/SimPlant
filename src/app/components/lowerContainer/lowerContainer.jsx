@@ -7,7 +7,7 @@ export default function LowerContainer(props) {
   return (
     <div className="lowerContainer">
       <FormContainer />
-      <Room roomName={props.selectedRoom}/>
+      <Room roomInfo={props.selectedRoom}/>
     </div>
   );
 }

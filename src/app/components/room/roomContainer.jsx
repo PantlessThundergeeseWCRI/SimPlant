@@ -25,7 +25,7 @@ const plant3 = {
 }
 
 export default function Room(props) {
-  const { roomName } = props;
+  const { roomInfo } = props;
   
   // Hook to set plants array
   const [plants, setPlants] = React.useState([]);
