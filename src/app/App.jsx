@@ -11,7 +11,7 @@ function App() {
     <div id="app">
       <Header />
 
-      <MainPage user={user}/>
+      <MainPage user={user} />
     </div>
   );
 }
