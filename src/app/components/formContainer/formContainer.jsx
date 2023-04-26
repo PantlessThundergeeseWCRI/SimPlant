@@ -67,8 +67,14 @@ export default function FormContainer(props) {
       });
 
     // Reload rooms
-    setRooms(rooms.concat([newPlantBody]));
-    };
+    const newRooms = rooms.map((room) => {
+      if (room.room_name === roomName) {
+        room.plants.push(newPlantBody);
+      }
+      return room;
+    });
+    setRooms(newRooms);
+  };
 
   return (
     <div className="formContainer">
