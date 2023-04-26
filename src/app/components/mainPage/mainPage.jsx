@@ -34,7 +34,7 @@ function MainPage(props) {
   return (
     <div className="page">
       <RoomMenu rooms={rooms} setSelectedRoom={setSelectedRoom} />
-      <LowerContainer rooms={rooms} selectedRoom={selectedRoom} />
+      <LowerContainer user={user} rooms={rooms} selectedRoom={selectedRoom} />
     </div>
   );
 }

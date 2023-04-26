@@ -2,16 +2,33 @@ import React from 'react';
 import FormSelect from './FormSelect';
 import './formContainerStyle.scss';
 
-export default function FormContainer() {
+export default function FormContainer(props) {
   // On submit, send a POST request to the server with the form data
-  // TODO edit these
-  const handleRoomSubmit = (event) => {
+  const handleRoomSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
-    for (const value of data.values()) {
-      console.log('value: ', value);
-    }
-  };
+
+    // Create room POST request body by accessing form data
+    const newRoomBody = {
+      username: props.user,
+      room_name: data.get('roomName'),
+      lighting: data.get('roomLighting'),
+      temperature: data.get('roomTemperature'),
+      humidity: data.get('roomHumidity')
+    };
+
+    console.log('JSON room body', JSON.stringify(newRoomBody));
+
+    // Send POST request to server
+    await fetch('http://localhost:3000/users/room/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newRoomBody),
+      });
+    };
+  
 
   const handlePlantSubmit = (event) => {
     event.preventDefault();
@@ -29,6 +46,7 @@ export default function FormContainer() {
           className="inputField"
           type="text"
           placeholder="Room Name"
+          name="roomName"
         ></input>
         <FormSelect name="roomLighting" property="Lighting"/>
         <FormSelect name="roomTemperature" property="Temperature"/>
@@ -38,9 +56,10 @@ export default function FormContainer() {
       <form className="plantForm" onSubmit={handlePlantSubmit}>
         <div className="formTitle">ADD PLANT</div>
         <input
-          name="plantSpecies"
+          className="plantSpecies"
           type="text"
           placeholder="Plant Species"
+          name="plantSpecies"
         ></input>
         <FormSelect name="plantLighting" property="Lighting"/>
         <FormSelect name="plantTemperature" property="Temperature"/>
