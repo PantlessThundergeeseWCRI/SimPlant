@@ -14,7 +14,9 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/"  element={
+        <Route 
+          path="/"  
+          element={
           // (() => {
           //   // if user is not logged in, load Login component to require login
           //   if (!loggedIn) {
@@ -47,7 +49,7 @@ function App() {
         } />
       </Routes>
     </BrowserRouter>
-  )
+  );
 }
 
 export default App;

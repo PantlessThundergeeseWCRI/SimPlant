@@ -13,19 +13,23 @@ import LowerContainer from '../lowerContainer/lowerContainer.jsx';
 function MainPage(props) {
   const { user } = props;
   const [rooms, setRooms] = React.useState([]);
+  console.log('rooms', rooms);
 
   // Fetch rooms from database
+  async function fetchData() {
+    const response = await fetch(`http://localhost:3000/users/${user}`);
+    const data = await response.json();
+    return data;
+  }
+
+  async function loadRooms() {
+    const data = await fetchData();
+    setRooms(data.rooms);
+  }
+
+  // Load rooms on page load
   useEffect( () => {
-    async function fetchData() {
-      const response = await fetch(`http://localhost:3000/users/${user}`);
-      const data = await response.json();
-      return data;
-    }
-    fetchData()
-      .then((data) => {
-        setRooms(data.rooms);
-      }
-    );
+    loadRooms();
   }, []);
   
   // Keep track of selected room in state to pass to room component
@@ -34,7 +38,7 @@ function MainPage(props) {
   return (
     <div className="page">
       <RoomMenu rooms={rooms} setSelectedRoom={setSelectedRoom} />
-      <LowerContainer rooms={rooms} selectedRoom={selectedRoom} />
+      <LowerContainer user={user} rooms={rooms} selectedRoom={selectedRoom} setRooms={setRooms}/>
     </div>
   );
 }
