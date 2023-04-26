@@ -9,6 +9,8 @@ export default function RoomMenu(props) {
     props.setSelectedRoom(event.target.value);
   };
 
+  console.log('rooms in roomMenu', rooms);
+
   // TODO add key prop to option elements
   return (
     <nav id="roomMenu">

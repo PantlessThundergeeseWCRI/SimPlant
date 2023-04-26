@@ -2,23 +2,78 @@ import React from 'react';
 import FormSelect from './FormSelect';
 import './formContainerStyle.scss';
 
-export default function FormContainer() {
+export default function FormContainer(props) {
+  const { user, roomName, rooms, setRooms } = props;
+  console.log('rooms', rooms);
+  console.log('room name', roomName);
   // On submit, send a POST request to the server with the form data
-  // TODO edit these
-  const handleRoomSubmit = (event) => {
+  const handleRoomSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
-    for (const value of data.values()) {
-      console.log('value: ', value);
-    }
-  };
+
+    // Create room POST request body by accessing form data
+    const newRoomBody = {
+      username: user,
+      room_name: data.get('roomName'),
+      lighting: data.get('roomLighting'),
+      temperature: data.get('roomTemperature'),
+      humidity: data.get('roomHumidity'),
+      plants: []
+    };
+
+    // Send POST request to server
+    await fetch('http://localhost:3000/users/room/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newRoomBody),
+      });
+
+    // Reload rooms
+    setRooms(rooms.concat([newRoomBody]));
+    };
+  
 
   const handlePlantSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
-    for (const value of data.values()) {
-      console.log('value: ', value);
-    }
+
+    // Create plant POST request body by accessing form data
+    const newPlantBody = {
+      username: user,
+      room_name: roomName,
+      species: data.get('plantSpecies'),
+      lighting: data.get('plantLighting'),
+      temperature: data.get('plantTemperature'),
+      humidity: data.get('plantHumidity'),
+      // watering: data.get('plantWatering'),
+      monday: data.get('Mon') ? true : false,
+      tuesday: data.get('Tue') ? true : false,
+      wednesday: data.get('Wed') ? true : false,
+      thursday: data.get('Thu') ? true : false,
+      friday: data.get('Fri') ? true : false,
+      saturday: data.get('Sat') ? true : false,
+      sunday: data.get('Sun') ? true : false
+    };    
+
+    // Send POST request to server
+    fetch('http://localhost:3000/users/plant/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        },
+      body: JSON.stringify(newPlantBody),
+      });
+
+    // Reload rooms
+    const newRooms = rooms.map((room) => {
+      if (room.room_name === roomName) {
+        room.plants.push(newPlantBody);
+      }
+      return room;
+    });
+    setRooms(newRooms);
   };
 
   return (
@@ -29,6 +84,7 @@ export default function FormContainer() {
           className="inputField"
           type="text"
           placeholder="Room Name"
+          name="roomName"
         ></input>
         <FormSelect name="roomLighting" property="Lighting"/>
         <FormSelect name="roomTemperature" property="Temperature"/>
@@ -38,9 +94,10 @@ export default function FormContainer() {
       <form className="plantForm" onSubmit={handlePlantSubmit}>
         <div className="formTitle">ADD PLANT</div>
         <input
-          name="plantSpecies"
+          className="plantSpecies"
           type="text"
           placeholder="Plant Species"
+          name="plantSpecies"
         ></input>
         <FormSelect name="plantLighting" property="Lighting"/>
         <FormSelect name="plantTemperature" property="Temperature"/>
