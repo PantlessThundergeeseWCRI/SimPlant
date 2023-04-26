@@ -24,11 +24,12 @@ export default function Login(props) {
   
   const handleClick = async () => {
     const result = await userLogin({
-        username,
-        password
+        username: username.current.value,
+        password: password.current.value
     });
     // if result is true (verified user), set loggedIn to true
     // props.setLoggedIn(true);
+    // props.setUser(username);
   }
 
   return (

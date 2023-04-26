@@ -8,7 +8,6 @@ export default function Signup(props) {
   const navigate = useNavigate();
 
   const userCreate = async credentials => {
-    console.log(credentials);
     // fetch call to create user
     const data = await fetch('http://localhost:3000/users/createUser', {
         method: 'POST',
@@ -29,6 +28,7 @@ export default function Signup(props) {
     // if user creation is successful, set loggedIn to true and navigate to '/' path
     if (result) {
       props.setLoggedIn(true);
+      props.setUser(username.current.value);
       navigate('/');
     }
   }

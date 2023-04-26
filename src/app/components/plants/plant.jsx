@@ -15,6 +15,7 @@ const Plant = (props) => {
       <p>Water PLACEHOLDER per week</p>
       <p>Humidity: {humidity}%</p>
       <p>Light: {lighting}/10</p>
+      <button type="button">Remove</button>
     </div>
   );
 }
