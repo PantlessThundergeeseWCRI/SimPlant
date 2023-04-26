@@ -3,7 +3,8 @@ import FormSelect from './FormSelect';
 import './formContainerStyle.scss';
 
 export default function FormContainer(props) {
-  const { user, roomName } = props;
+  const { user, roomName, rooms, setRooms } = props;
+  console.log('rooms', rooms);
   console.log('room name', roomName);
   // On submit, send a POST request to the server with the form data
   const handleRoomSubmit = async (event) => {
@@ -16,7 +17,8 @@ export default function FormContainer(props) {
       room_name: data.get('roomName'),
       lighting: data.get('roomLighting'),
       temperature: data.get('roomTemperature'),
-      humidity: data.get('roomHumidity')
+      humidity: data.get('roomHumidity'),
+      plants: []
     };
 
     // Send POST request to server
@@ -27,6 +29,9 @@ export default function FormContainer(props) {
       },
       body: JSON.stringify(newRoomBody),
       });
+
+    // Reload rooms
+    setRooms(rooms.concat([newRoomBody]));
     };
   
 
@@ -52,8 +57,6 @@ export default function FormContainer(props) {
       sunday: data.get('Sun') ? true : false
     };    
 
-    console.log('newPlantBody: ', JSON.stringify(newPlantBody));
-
     // Send POST request to server
     fetch('http://localhost:3000/users/plant/', {
       method: 'POST',
@@ -62,6 +65,9 @@ export default function FormContainer(props) {
         },
       body: JSON.stringify(newPlantBody),
       });
+
+    // Reload rooms
+    setRooms(rooms.concat([newPlantBody]));
     };
 
   return (
