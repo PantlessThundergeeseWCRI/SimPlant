@@ -1,4 +1,5 @@
 import React from 'react';
+import FormSelect from './FormSelect';
 import './formContainerStyle.scss';
 
 export default function FormContainer() {
@@ -29,24 +30,9 @@ export default function FormContainer() {
           type="text"
           placeholder="Room Name"
         ></input>
-        <select name="roomLighting">
-          <option>Please Choose a Lighting Level</option>
-          <option value="High Light">High</option>
-          <option value="Medium Light">Medium</option>
-          <option value="Low Light">Low</option>
-        </select>
-        <select name="roomTemp">
-          <option>Please Choose a Temperature Level</option>
-          <option value="High Temp">High</option>
-          <option value="Medium Temp">Medium</option>
-          <option value="Low Temp">Low</option>
-        </select>
-        <select name="roomHumidity">
-          <option>Please Choose a Humidity Level</option>
-          <option value="High Humidity">High</option>
-          <option value="Medium Humidity">Medium</option>
-          <option value="Low Humidity">Low</option>
-        </select>
+        <FormSelect name="roomLighting" property="Lighting"/>
+        <FormSelect name="roomTemperature" property="Temperature"/>
+        <FormSelect name="roomHumidity" property="Humidity"/>
         <button type="submit">Submit</button>
       </form>
       <form className="plantForm" onSubmit={handlePlantSubmit}>
@@ -56,21 +42,40 @@ export default function FormContainer() {
           type="text"
           placeholder="Plant Species"
         ></input>
-        <input
-          name="plantLighting"
-          type="text"
-          placeholder="Lighting Needs"
-        ></input>
-        <input
-          name="plantWatering"
-          type="text"
-          placeholder="Watering Needs"
-        ></input>
-        <input
-          name="plantHumidity"
-          type="text"
-          placeholder="Humidity Needs"
-        ></input>
+        <FormSelect name="plantLighting" property="Lighting"/>
+        <FormSelect name="plantTemperature" property="Temperature"/>
+        <FormSelect name="plantHumidity" property="Humidity"/>
+        <FormSelect name="plantWatering" property="Watering"/>
+        <div className="schedule">
+          <div>
+            <label htmlFor="Mon">Mon</label>
+            <input type="checkbox" id="Mon" name="Mon" value="Mon"></input>
+          </div>
+          <div>
+            <label htmlFor="Tue">Tue</label>
+            <input type="checkbox" id="Tue" name="Tue" value="Tue"></input>
+          </div>
+          <div>
+            <label htmlFor="Wed">Wed</label>
+            <input type="checkbox" id="Wed" name="Wed" value="Wed"></input>
+          </div>
+          <div>
+            <label htmlFor="Thur">Thur</label>
+            <input type="checkbox" id="Thur" name="Thur" value="Thur"></input>
+          </div>
+          <div>
+            <label htmlFor="Fri">Fri</label>
+            <input type="checkbox" id="Fri" name="Fri" value="Fri"></input>
+          </div>
+          <div>
+            <label htmlFor="Sat">Sat</label>
+            <input type="checkbox" id="Sat" name="Sat" value="Sat"></input>
+          </div>
+          <div>
+            <label htmlFor="Sun">Sun</label>
+            <input type="checkbox" id="Sun" name="Sun" value="Sun"></input>
+          </div>
+        </div>
         <button type="submit">Submit</button>
       </form>
     </div>
