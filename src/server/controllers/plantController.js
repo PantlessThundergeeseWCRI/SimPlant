@@ -92,7 +92,7 @@ plantController.addPlant = async (req, res, next) => {
 plantController.deletePlant = async (req, res, next) => {
   //destructure username, room_name, plant_name from req.body
   const { username, room_name, species } = req.body;
-  //throw eror if username, room_name, or plant_name are not provided
+  //throw eror if username, room_name, or species are not provided
   if (!username || !room_name || !species) {
     throw new Error('Username, room name, or plant name not provided');
   }
@@ -116,7 +116,7 @@ plantController.deletePlant = async (req, res, next) => {
       throw new Error('Plant not found');
     } else {
       const result = await model.User.updateOne(
-        { username, 'rooms.room_name': room_name },
+        { username, room_name },
         { $pull: { 'rooms.$.plants': { species: species } } }
       );
       if (!result) {

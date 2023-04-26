@@ -63,7 +63,7 @@ roomController.deleteRoom = async (req, res, next) => {
   }
 
   try {
-    //retrive user document from db according to username and room_name, store in variable
+    //retrive user document from db according to username, store in variable
     const currentUser = await model.User.findOne({
       username,
     });
@@ -71,8 +71,7 @@ roomController.deleteRoom = async (req, res, next) => {
     if (!currentUser) {
       throw new Error('Error finding current user');
     } else {
-      //delete room_name from current user document
-
+      //update on the user doc and 'pull' room_name from its rooms array
       await model.User.updateOne(
         { username },
         { $pull: { rooms: { room_name } } }
