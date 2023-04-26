@@ -14,22 +14,26 @@ router.post('/createUser', userController.createUser, (req, res) => {
   return res.status(201).send(`New user created!`);
 });
 
-//delete room
+//delete a room
 router.delete('/room/delete', roomController.deleteRoom, (req, res) => {
   res.status(200).send('successfully deleted room');
 });
 
-// //delete plant
+// delete a plant
 router.delete('/plant/delete', plantController.deletePlant, (req, res) => {
   res.status(200).send('successfully deleted plant');
 });
 
-//add room
+// move a plant from one room to another
+router.patch('/plant/moveplant', plantController.movePlant, (req, res) => {
+  res.status(200).send('successfully moved plant');
+});
+//add a room
 router.post('/room/', roomController.addRoom, (req, res) => {
   res.status(201).send('New room added!');
 });
 
-// add plant
+// add a plant
 router.post('/plant', plantController.addPlant, (req, res) => {
   res.status(201).send('New plant added!');
 });
