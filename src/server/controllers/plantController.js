@@ -4,6 +4,7 @@ const model = require('../model.js');
 
 const plantController = {};
 plantController.addPlant = async (req, res, next) => {
+  console.log('req.body', req.body);
   const {
     username,
     room_name,

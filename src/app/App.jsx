@@ -5,11 +5,13 @@ import MainPage from './components/mainPage/mainPage.jsx';
 import './application.scss';
 
 function App() {
+  // TODO get user based on login
+  const [user, setUser] = React.useState('test');
   return (
     <div id="app">
       <Header />
 
-      <MainPage />
+      <MainPage user={user}/>
     </div>
   );
 }
