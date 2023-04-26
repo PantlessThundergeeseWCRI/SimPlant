@@ -14,9 +14,19 @@ router.post('/createUser', userController.createUser, (req, res) => {
   return res.status(201).send(`New user created!`);
 });
 
+//delete room
+router.delete('/room/delete', roomController.deleteRoom, (req, res)=>{
+  res.status(200).send('successfully deleted room')
+})
+
+// //delete plant
+router.delete('/plant/delete', plantController.deletePlant, (req, res)=>{
+  res.status(200).send('successfully deleted plant')
+})
+
 //add room
 router.post('/room/', roomController.addRoom, (req, res) => {
-  res.status(200).send('New room added!');
+  res.status(201).send('New room added!');
 });
 
 // add plant
@@ -28,5 +38,7 @@ router.post('/plant', plantController.addPlant, (req, res) => {
 router.get('/', userController.getAll, (req, res) => {
   res.status(200).json(res.locals.users);
 });
+
+
 
 module.exports = router;
