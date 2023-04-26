@@ -7,32 +7,16 @@ import Signup from './pages/Signup.js';
 import './application.scss';
 
 function App() {
+  // TODO get user based on login
+  const [user, setUser] = React.useState('test');
   const [loggedIn, setLoggedIn] = useState();
-
-//   // if user is not logged in, load Login component to require login
-//   if (!loggedIn) {
-//     return (
-//       <>
-//         <Header />
-//         <Login setLoggedIn={setLoggedIn} />
-//       </>
-//     )
-//   }
-
-//   // if user is logged in, display homepage
-//   return (
-//     <div id="app">
-//       <Header />
-
-//       <MainPage />
-//     </div>
-//   );
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/"  element={
           (() => {
+            // if user is not logged in, load Login component to require login
             if (!loggedIn) {
               return (
                 <>
@@ -41,6 +25,7 @@ function App() {
                 </>
               )
             } else {
+              // if user is logged in, display homepage
               return (
                 <div id="app">
                   <Header />
