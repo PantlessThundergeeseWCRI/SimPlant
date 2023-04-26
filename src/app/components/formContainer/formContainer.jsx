@@ -3,6 +3,8 @@ import FormSelect from './FormSelect';
 import './formContainerStyle.scss';
 
 export default function FormContainer(props) {
+  const { user, roomName } = props;
+  console.log('room name', roomName);
   // On submit, send a POST request to the server with the form data
   const handleRoomSubmit = async (event) => {
     event.preventDefault();
@@ -10,14 +12,12 @@ export default function FormContainer(props) {
 
     // Create room POST request body by accessing form data
     const newRoomBody = {
-      username: props.user,
+      username: user,
       room_name: data.get('roomName'),
       lighting: data.get('roomLighting'),
       temperature: data.get('roomTemperature'),
       humidity: data.get('roomHumidity')
     };
-
-    console.log('JSON room body', JSON.stringify(newRoomBody));
 
     // Send POST request to server
     await fetch('http://localhost:3000/users/room/', {
@@ -33,10 +33,36 @@ export default function FormContainer(props) {
   const handlePlantSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.target);
-    for (const value of data.values()) {
-      console.log('value: ', value);
-    }
-  };
+
+    // Create plant POST request body by accessing form data
+    const newPlantBody = {
+      username: user,
+      room_name: roomName,
+      species: data.get('plantSpecies'),
+      lighting: data.get('plantLighting'),
+      temperature: data.get('plantTemperature'),
+      humidity: data.get('plantHumidity'),
+      // watering: data.get('plantWatering'),
+      monday: data.get('Mon') ? true : false,
+      tuesday: data.get('Tue') ? true : false,
+      wednesday: data.get('Wed') ? true : false,
+      thursday: data.get('Thu') ? true : false,
+      friday: data.get('Fri') ? true : false,
+      saturday: data.get('Sat') ? true : false,
+      sunday: data.get('Sun') ? true : false
+    };    
+
+    console.log('newPlantBody: ', JSON.stringify(newPlantBody));
+
+    // Send POST request to server
+    fetch('http://localhost:3000/users/plant/', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        },
+      body: JSON.stringify(newPlantBody),
+      });
+    };
 
   return (
     <div className="formContainer">
