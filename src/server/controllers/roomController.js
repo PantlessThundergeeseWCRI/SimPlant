@@ -51,4 +51,39 @@ roomController.addRoom = async (req, res, next) => {
   }
 };
 
+roomController.deleteRoom = async (req, res, next) => {
+  //destructure username, room_name from req.body
+  const { username, room_name } = req.body;
+  //return error if username or room_name not provided
+  if (!username || !room_name) {
+    return next({
+      log: 'roomController.deleteRoom',
+      message: { err: 'Username or room name not provided' },
+    });
+  }
+
+  try {
+    //retrive user document from db according to username, store in variable
+    const currentUser = await model.User.findOne({
+      username,
+    });
+    //throw error if current user does not exist in database
+    if (!currentUser) {
+      throw new Error('Error finding current user');
+    } else {
+      //update on the user doc and 'pull' room_name from its rooms array
+      await model.User.updateOne(
+        { username },
+        { $pull: { rooms: { room_name } } }
+      );
+      return next();
+    }
+  } catch (err) {
+    return next({
+      log: 'roomController.delete',
+      message: { err: 'Error deleting a new room ' + `${err}` },
+    });
+  }
+};
+
 module.exports = roomController;

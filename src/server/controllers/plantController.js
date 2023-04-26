@@ -90,4 +90,42 @@ plantController.addPlant = async (req, res, next) => {
   }
 };
 
+plantController.deletePlant = async (req, res, next) => {
+  //destructure username, room_name, plant_name from req.body
+  const { username, room_name, species } = req.body;
+  //throw eror if username, room_name, or species are not provided
+  if(!username || !room_name || !species) {
+    throw new Error('Username, room name, or plant name not provided')
+  }
+  try {
+    //find user with username, throw error if user not found
+    const currentUser = await model.User.findOne({username});
+    if(!currentUser){
+      throw new Error('User not found')
+    }
+    //find room with corresponding currentUser with room_name
+    const currentRoom = currentUser.rooms.find(rooms => rooms.room_name === room_name)
+    if(!currentRoom){
+      throw new Error('Room not found')
+    }
+    const currentPlant = currentRoom.plants.some(plant => plant.species === species)
+    if(!currentPlant) {
+      throw new Error('Plant not found');
+    }else{
+      const result = await model.User.updateOne({username, room_name}, {$pull: {'rooms.$.plants': { species: species } } })
+      if(!result){
+        throw new Error('Error deleting plant from database')
+      }
+      return next();
+    }
+  }
+
+  catch (err){
+    return next({
+      log: 'plantController.deletePlant',
+      message: { err: 'Error deleting current plant: ' + `${err}` },
+    })
+  }
+}
+
 module.exports = plantController;
