@@ -42,7 +42,6 @@ userController.createUser = async(req, res, next) => {
 userController.verifyUser = async (req, res, next) => {
   // destructure username and password from req.body
   const { username, password} = req.body;
-  console.log(username, password)
   if(!username || !password) {
     throw new Error('Username or password not provided');
   }
@@ -53,8 +52,8 @@ userController.verifyUser = async (req, res, next) => {
     if(!user){
       throw new Error('user not found')
     }
-    console.log('user: ', user)
-    const loggedIn = bcrypt.compare(user.password, password)
+    // console.log('user: ', user)
+    const loggedIn = await bcrypt.compare(password, user.password);
     if(!loggedIn){
       throw new Error('incorrect password')
     }

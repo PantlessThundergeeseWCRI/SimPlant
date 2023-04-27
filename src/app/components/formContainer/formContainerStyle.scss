@@ -43,6 +43,10 @@
   width: 100%;
   font-family: 'Vegur';
   box-shadow: 0 2px 8px 1px $shadow;
+
+  select:last-of-type {
+    width: 8rem;
+  }
 }
 
 select {
