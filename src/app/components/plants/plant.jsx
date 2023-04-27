@@ -16,7 +16,7 @@ const Plant = (props) => {
       <p>Water PLACEHOLDER per week</p>
       <p>Humidity: {humidity}%</p>
       <p>Light: {lighting}/10</p>
-      <button type="button" onClick={() => props.deletePlant(props.user, props.room_name, species)}>Remove</button>
+      <button type="button" onClick={() => props.deletePlant(props.user, props.roomInfo.room_name, species)}>Remove</button>
     </div>
   );
 }
