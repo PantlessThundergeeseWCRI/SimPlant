@@ -28,7 +28,8 @@ const Plant = (props) => {
   // Get today's day of the week (eg. 'Monday')
   const today = new Date().toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
   console.log('props.plant[today]', props.plant[today]);
-  if (props.plant[today]) wateringStr += ' (water today!)';
+  wateringStr = "Water on: " + wateringStr;
+  if (props.plant[today]) wateringStr = ' WATER TODAY!';
 
   // Convert [0, 1, 2] values to low, medium, high
 
@@ -36,11 +37,15 @@ const Plant = (props) => {
   humidity = humidity === 0 ? 'Low' : humidity === 1 ? 'Medium' : 'High';
   temperature = temperature === 0 ? 'Low' : temperature === 1 ? 'Medium' : 'High';
 
+  // Compare plant light, humidity, temp to room light, humidity, temp
+  // add check emoji if the same, up arrow if room is higher, down arrow if room is lower
+
+
   return(
     <div className='plant'>
       <p className="species">Species: {species}</p>
       <img className= "plant-img" src="https://em-content.zobj.net/thumbs/160/apple/271/potted-plant_1fab4.png"></img>
-      <p>Water on: {wateringStr}</p>
+      <p>{wateringStr}</p>
       <p>Humidity: {humidity}</p>
       <p>Light: {lighting}</p>
       <p>Temperature: {temperature}</p>
