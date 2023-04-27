@@ -3,6 +3,8 @@ const router = express.Router();
 const userController = require('../controllers/userController.js');
 const roomController = require('../controllers/roomController.js');
 const plantController = require('../controllers/plantController.js');
+const cookieController = require('../controllers/cookieController');
+const sessionController = require('../controllers/sessionController');
 // root endpoint is 'http://localhost:3000/users'
 
 // delete a plant
@@ -25,15 +27,37 @@ router.get('/:name', userController.getData, (req, res) => {
   res.status(200).json(res.locals.userData);
 });
 
-//create a new user
-router.post('/createUser', userController.createUser, (req, res) => {
-  return res.status(201).send(`New user created!`);
-});
+//signup
+router.post(
+  '/createUser',
+  userController.createUser,
+  cookieController.setSSIDCookie,
+  sessionController.startSession,
+  (req, res) => {
+    return res.status(201).json(res.locals.username);
+  }
+);
 
 //login
-router.post('/login', userController.verifyUser, (req, res) => {
-  res.status(200).send('user verified!');
-})
+router.post(
+  '/login',
+  userController.verifyUser,
+  cookieController.setSSIDCookie,
+  sessionController.startSession,
+  (req, res) => {
+    res.status(201).json(res.locals.username);
+  }
+);
+
+//log out
+router.delete(
+  '/logout/:username',
+  sessionController.endSession,
+  cookieController.destroySSIDCookie,
+  (req, res) => {
+    res.status(204).send('user logged out'); // the message does not show up for a 204 status
+  }
+);
 
 //add a room
 router.post('/room', roomController.addRoom, (req, res) => {
