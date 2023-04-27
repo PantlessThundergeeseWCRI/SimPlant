@@ -4,7 +4,7 @@ import Checkbox from './Checkbox';
 import './formContainerStyle.scss';
 
 export default function FormContainer(props) {
-  const { user, roomName, rooms, setRooms, setSelectedRoom } = props;
+  const { user, roomName, rooms, setRooms, selectedRoom, setSelectedRoom } = props;
   const days = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"];
   console.log('rooms', rooms);
   console.log('room name', roomName);
@@ -90,6 +90,11 @@ export default function FormContainer(props) {
 
   };
 
+  // When a room is selected, set selectedRoom in state
+  const handleSelection = (event) => {
+    setSelectedRoom(event.target.value);
+  };
+
   return (
     <div className="formContainer">
       <form className="roomForm" onSubmit={handleRoomSubmit}>
@@ -116,12 +121,17 @@ export default function FormContainer(props) {
         <FormSelect name="plantLighting" property="Lighting"/>
         <FormSelect name="plantTemperature" property="Temperature"/>
         <FormSelect name="plantHumidity" property="Humidity"/>
-        <FormSelect name="plantWatering" property="Watering"/>
+        <p><u>Please select your watering schedule</u></p>
         <div className="schedule">
           {days.map(day => {
             return <Checkbox day={day} />
           })}
         </div>
+        <select name="plant-rooms" value={selectedRoom} onChange={handleSelection}>
+          {rooms.map((room) => {
+            return <option value={room.room_name}>{room.room_name}</option>
+          })}
+        </select>
         <button type="submit">Submit</button>
       </form>
     </div>

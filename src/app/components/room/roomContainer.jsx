@@ -20,7 +20,6 @@ export default function Room(props) {
 
   // delete plant from database upon clicking remove button in plant component
   const deletePlant = async (username, room_name, species) => {
-    console.log('roomContainer room_name: ', room_name);
     const result = await fetch('http://localhost:3000/users/plant/delete', {
       method: 'DELETE',
       headers: {
