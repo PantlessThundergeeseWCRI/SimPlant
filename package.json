@@ -44,6 +44,7 @@
     "concurrently": "^8.0.1",
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.3",
+    "express-session": "^1.17.3",
     "html-webpack-plugin": "^5.5.1",
     "sass": "^1.62.0",
     "sass-loader": "^13.2.2",

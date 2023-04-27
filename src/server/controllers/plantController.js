@@ -1,4 +1,4 @@
-const model = require('../model.js');
+const model = require('../userModel.js');
 
 // const ObjectId = require('mongodb').ObjectId;
 
@@ -104,11 +104,10 @@ plantController.deletePlant = async (req, res, next) => {
       throw new Error('User not found');
     }
     //find room with corresponding currentUser with room_name
-    const currentRoom = currentUser.rooms.find(
-      rooms => {
-        console.log(rooms)
-        return rooms.room_name === room_name}
-    );
+    const currentRoom = currentUser.rooms.find(rooms => {
+      console.log(rooms);
+      return rooms.room_name === room_name;
+    });
     if (!currentRoom) {
       throw new Error('Room not found');
     }
