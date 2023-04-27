@@ -17,29 +17,29 @@ function App() {
         <Route 
           path="/"  
           element={
-          // (() => {
-          //   // if user is not logged in, load Login component to require login
-          //   if (!loggedIn) {
-          //     return (
-          //       <>
-          //         <Header />
-          //         <Login setLoggedIn={setLoggedIn} setUser={setUser}/>
-          //       </>
-          //     )
-          //   } else {
-          //     // if user is logged in, display homepage
-          //     return (
-          //       <div id="app">
-          //         <Header />
-          //         <MainPage user={user} />
-          //       </div>
-          //     );
-          //   }
-          // })()
-          <div id="app">
-            <Header />
-            <MainPage user={user} />
-          </div>
+          (() => {
+            // if user is not logged in, load Login component to require login
+            if (!loggedIn) {
+              return (
+                <>
+                  <Header />
+                  <Login setLoggedIn={setLoggedIn} setUser={setUser}/>
+                </>
+              )
+            } else {
+              // if user is logged in, display homepage
+              return (
+                <div id="app">
+                  <Header />
+                  <MainPage user={user} />
+                </div>
+              );
+            }
+          })()
+          // <div id="app">
+          //   <Header />
+          //   <MainPage user={user} />
+          // </div>
         } />
         <Route path="/signup" element={
           <>

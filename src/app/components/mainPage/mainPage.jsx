@@ -36,7 +36,6 @@ function MainPage(props) {
   
   useEffect(() => {
     // Set initial value of selectedRoom to first room in rooms array
-    console.log('hit useEffect')
     if (rooms.length > 0 && !roomsPopulated) {
       setSelectedRoom(rooms[0].room_name);
       setRoomsPopulated(true);
@@ -48,6 +47,7 @@ function MainPage(props) {
 
   return (
     <div className="page">
+      {console.log('selectedRoom in return: ', selectedRoom)}
       <RoomMenu rooms={rooms} selectedRoom={selectedRoom} setSelectedRoom={setSelectedRoom} />
       <LowerContainer user={user} rooms={rooms} selectedRoom={selectedRoom} setSelectedRoom={setSelectedRoom} setRooms={setRooms}/>
     </div>
