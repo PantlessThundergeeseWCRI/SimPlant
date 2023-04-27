@@ -7,7 +7,8 @@ const Plant = (props) => {
   console.log('props', props);
   let { species, 
           humidity, 
-          lighting 
+          lighting, 
+          temperature
         } = props.plant;
 
   // Create array of all of the days that the plant needs to be watered
@@ -33,6 +34,7 @@ const Plant = (props) => {
 
   lighting = lighting === 0 ? 'Low' : lighting === 1 ? 'Medium' : 'High';
   humidity = humidity === 0 ? 'Low' : humidity === 1 ? 'Medium' : 'High';
+  temperature = temperature === 0 ? 'Low' : temperature === 1 ? 'Medium' : 'High';
 
   return(
     <div className='plant'>
@@ -41,7 +43,7 @@ const Plant = (props) => {
       <p>Water on: {wateringStr}</p>
       <p>Humidity: {humidity}</p>
       <p>Light: {lighting}</p>
-      <p>Temperature: {props.plant.temperature}</p>
+      <p>Temperature: {temperature}</p>
       <button type="button" onClick={() => props.deletePlant(props.user, props.roomInfo.room_name, species)}>Remove</button>
     </div>
   );
