@@ -17,9 +17,6 @@ function MainPage(props) {
   const [selectedRoom, setSelectedRoom] = React.useState('');
   const [roomsPopulated, setRoomsPopulated] = React.useState(false);
 
-  // force update hook to be used when deleting plants
-  const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
-
   // Fetch rooms from database
   async function fetchData() {
     const response = await fetch(`http://localhost:3000/users/${user}`);
@@ -52,7 +49,7 @@ function MainPage(props) {
   return (
     <div className="page">
       <RoomMenu rooms={rooms} selectedRoom={selectedRoom} setSelectedRoom={setSelectedRoom} />
-      <LowerContainer user={user} rooms={rooms} selectedRoom={selectedRoom} setSelectedRoom={setSelectedRoom} setRooms={setRooms} forceUpdate={forceUpdate}/>
+      <LowerContainer user={user} rooms={rooms} selectedRoom={selectedRoom} setSelectedRoom={setSelectedRoom} setRooms={setRooms}/>
     </div>
   );
 }

@@ -1,13 +1,16 @@
-import React from 'react';
+import React, { useReducer } from 'react';
 import './roomContainerStyle.scss';
 import Plant from '../plants/plant.jsx';
 
 export default function Room(props) {
-  const { user, roomInfo, forceUpdate } = props;
+  const { user, roomInfo} = props;
   console.log('roomInfo in roomContainer: ', roomInfo);
   
   // Hook to set plants array
   const [plants, setPlants] = React.useState([]);
+
+  // force update hook to be used when deleting plants
+  const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
 
   // When roomInfo is set, set plants array
   React.useEffect (() => {
