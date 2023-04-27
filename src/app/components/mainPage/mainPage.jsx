@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import './mainPageStyle.scss';
 import RoomMenu from '../roomMenu/roomMenu.jsx';
 import LowerContainer from '../lowerContainer/lowerContainer.jsx';
@@ -15,6 +15,9 @@ function MainPage(props) {
   const [rooms, setRooms] = React.useState([]);
   // Keep track of selected room in state to pass to room component
   const [selectedRoom, setSelectedRoom] = React.useState('');
+
+  // force update hook to be used when deleting plants
+  const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
 
   // Fetch rooms from database
   async function fetchData() {
@@ -45,7 +48,7 @@ function MainPage(props) {
   return (
     <div className="page">
       <RoomMenu rooms={rooms} selectedRoom={selectedRoom} setSelectedRoom={setSelectedRoom} />
-      <LowerContainer user={user} rooms={rooms} selectedRoom={selectedRoom} setSelectedRoom={setSelectedRoom} setRooms={setRooms}/>
+      <LowerContainer user={user} rooms={rooms} selectedRoom={selectedRoom} setSelectedRoom={setSelectedRoom} setRooms={setRooms} forceUpdate={forceUpdate}/>
     </div>
   );
 }

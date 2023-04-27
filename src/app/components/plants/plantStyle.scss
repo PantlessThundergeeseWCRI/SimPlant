@@ -9,8 +9,9 @@
 }
 
 .plant {
-  // height: 300px;
+  position: relative;
   height: auto;
+  max-height: 320px;
   width: 170px;
   background-color: $lightPrimary;
   padding: 5px;
@@ -22,6 +23,10 @@
   button {
     width: auto;
     padding: 6px 8px;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-67%);
   }
 
   button:hover {

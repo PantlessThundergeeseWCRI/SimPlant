@@ -4,7 +4,7 @@ import FormContainer from '../formContainer/formContainer.jsx';
 import Room from '../room/roomContainer.jsx';
 
 export default function LowerContainer(props) {
-  const { selectedRoom, setSelectedRoom, rooms, setRooms } = props;
+  const { selectedRoom, setSelectedRoom, rooms, setRooms, forceUpdate } = props;
 
   // get room object from rooms array, to pass to Room component
   const roomInfo = rooms.find((room) => room.room_name === selectedRoom);
@@ -12,7 +12,7 @@ export default function LowerContainer(props) {
   return (
     <div className="lowerContainer">
       <FormContainer user={props.user} rooms={rooms} roomName={selectedRoom} setSelectedRoom={setSelectedRoom} setRooms={setRooms}/>
-      <Room user={props.user} roomInfo={roomInfo}/>
+      <Room user={props.user} roomInfo={roomInfo} forceUpdate={forceUpdate}/>
     </div>
   );
 }

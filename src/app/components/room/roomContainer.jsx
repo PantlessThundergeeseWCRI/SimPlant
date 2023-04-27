@@ -3,7 +3,7 @@ import './roomContainerStyle.scss';
 import Plant from '../plants/plant.jsx';
 
 export default function Room(props) {
-  const { user, roomInfo } = props;
+  const { user, roomInfo, forceUpdate } = props;
   console.log('roomInfo in roomContainer: ', roomInfo);
   
   // Hook to set plants array
@@ -29,7 +29,12 @@ export default function Room(props) {
         species
       })
     })
-    console.log(result);
+    if (result) {
+      const deletedPlant = roomInfo.plants.find(plant => plant.species === species);
+      const index = roomInfo.plants.indexOf(deletedPlant);
+      if (index !== -1) roomInfo.plants.splice(index, 1);
+      forceUpdate();
+    }
   }
 
   // TODO add key prop to Plant components
