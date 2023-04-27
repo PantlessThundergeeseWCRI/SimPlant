@@ -39,8 +39,25 @@ const Plant = (props) => {
 
   // Compare plant light, humidity, temp to room light, humidity, temp
   // add check emoji if the same, up arrow if room is higher, down arrow if room is lower
+  const emojis = [];
+  for (const key in props.roomInfo) {
+    if (key === 'lighting' || key === 'humidity' || key === 'temperature') {
+      if (props.plant[key] === props.roomInfo[key]) {
+        emojis.push('✅');
+      } else if (props.plant[key] < props.roomInfo[key]) {
+        emojis.push('⬇️');
+      } else {
+        emojis.push('⬆️');
+      }
+    }
+  }
 
+  // Add indicator emojis to each plant property
+  lighting+=emojis[0];
+  humidity+=emojis[1];
+  temperature+=emojis[2];
 
+  console.log('emojis', emojis);
   return(
     <div className='plant'>
       <p className="species">Species: {species}</p>
