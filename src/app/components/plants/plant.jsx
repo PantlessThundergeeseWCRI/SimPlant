@@ -35,6 +35,7 @@ const Plant = (props) => {
       <p>Water on: {wateringStr}</p>
       <p>Humidity: {humidity}</p>
       <p>Light: {lighting}</p>
+      <button type="button" onClick={() => props.deletePlant(props.user, props.roomInfo.room_name, species)}>Remove</button>
     </div>
   );
 }
