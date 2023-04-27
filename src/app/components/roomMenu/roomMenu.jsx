@@ -12,12 +12,12 @@ export default function RoomMenu(props) {
 
   // TODO add key prop to option elements
   return (
-    <nav id="roomMenu">
-      <select name="rooms" value={selectedRoom} onChange={handleSelection}>
-        {rooms.map((room) => {
-          return <option value={room.room_name}>{room.room_name}</option>
-        })}
-      </select>
-    </nav>
+      <nav id="roomMenu">
+        <select name="rooms" value={selectedRoom} onChange={handleSelection}>
+          {rooms.map((room) => {
+            return <option value={room.room_name}>{room.room_name}</option>
+          })}
+        </select>
+      </nav>
   );
 }
