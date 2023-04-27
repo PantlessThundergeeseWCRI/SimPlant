@@ -13,7 +13,9 @@ import LowerContainer from '../lowerContainer/lowerContainer.jsx';
 function MainPage(props) {
   const { user } = props;
   const [rooms, setRooms] = React.useState([]);
-  console.log('rooms', rooms);
+  // Keep track of selected room in state to pass to room component
+  const [selectedRoom, setSelectedRoom] = React.useState('');
+  const [roomsPopulated, setRoomsPopulated] = React.useState(false);
 
   // Fetch rooms from database
   async function fetchData() {
@@ -32,13 +34,22 @@ function MainPage(props) {
     loadRooms();
   }, []);
   
-  // Keep track of selected room in state to pass to room component
-  const [selectedRoom, setSelectedRoom] = React.useState('');
+  useEffect(() => {
+    // Set initial value of selectedRoom to first room in rooms array
+    console.log('hit useEffect')
+    if (rooms.length > 0 && !roomsPopulated) {
+      setSelectedRoom(rooms[0].room_name);
+      setRoomsPopulated(true);
+    }
+  }, [rooms]);
+
+  // Test for new room loading
+  console.log('selected room: ', selectedRoom);
 
   return (
     <div className="page">
-      <RoomMenu rooms={rooms} setSelectedRoom={setSelectedRoom} />
-      <LowerContainer user={user} rooms={rooms} selectedRoom={selectedRoom} setRooms={setRooms}/>
+      <RoomMenu rooms={rooms} selectedRoom={selectedRoom} setSelectedRoom={setSelectedRoom} />
+      <LowerContainer user={user} rooms={rooms} selectedRoom={selectedRoom} setSelectedRoom={setSelectedRoom} setRooms={setRooms}/>
     </div>
   );
 }
