@@ -21,7 +21,13 @@ const Plant = (props) => {
   if (props.plant.sunday) wateringDays.push('Sun');
 
   // Convert array to string, with commas between each day but not after the last day
-  const wateringStr = wateringDays.join(', ');
+  let wateringStr = wateringDays.join(', ');
+
+  // If plant needs to be watered today, add (water today) to the end of the string
+  // Get today's day of the week (eg. 'Monday')
+  const today = new Date().toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
+  console.log('props.plant[today]', props.plant[today]);
+  if (props.plant[today]) wateringStr += ' (water today!)';
 
   // Convert [0, 1, 2] values to low, medium, high
 
@@ -35,6 +41,7 @@ const Plant = (props) => {
       <p>Water on: {wateringStr}</p>
       <p>Humidity: {humidity}</p>
       <p>Light: {lighting}</p>
+      <p>Temperature: {props.plant.temperature}</p>
       <button type="button" onClick={() => props.deletePlant(props.user, props.roomInfo.room_name, species)}>Remove</button>
     </div>
   );
