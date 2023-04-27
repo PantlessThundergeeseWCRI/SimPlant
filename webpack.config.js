@@ -10,13 +10,15 @@ module.exports = {
   },
   mode: process.env.NODE_ENV,
   devServer: {
+    // host: 'localhost',
+    // port: 8080,
     static: {
       directory: path.resolve(__dirname, 'public'),
       publicPath: '/',
     },
     proxy: {
       '/': {
-        target: 'http://localhost:3000',
+        target: 'http://localhost:3000/',
         secure: false,
       },
     },

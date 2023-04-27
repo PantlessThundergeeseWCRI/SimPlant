@@ -12,7 +12,7 @@ export default function Login(props) {
     console.log('username: ', username.current.value);
     console.log('password: ', password.current.value);
     // fetch call to validate user
-    // const data = await fetch('http://localhost:3000/users', {
+    // const data = await fetch('http://localhost:3000/users/login', {
     //     method: 'POST',
     //     headers: {
     //         'Content-Type': 'application/json'

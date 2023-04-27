@@ -15,6 +15,7 @@ function MainPage(props) {
   const [rooms, setRooms] = React.useState([]);
   // Keep track of selected room in state to pass to room component
   const [selectedRoom, setSelectedRoom] = React.useState('');
+  const [roomsPopulated, setRoomsPopulated] = React.useState(false);
 
   // force update hook to be used when deleting plants
   const [ignored, forceUpdate] = useReducer(x => x + 1, 0);
@@ -38,12 +39,15 @@ function MainPage(props) {
   
   useEffect(() => {
     // Set initial value of selectedRoom to first room in rooms array
-    if (rooms.length > 0) {
-      console.log('new useEffect reached');
-      console.log('rooms[0]: ', rooms[0]);
+    console.log('hit useEffect')
+    if (rooms.length > 0 && !roomsPopulated) {
       setSelectedRoom(rooms[0].room_name);
+      setRoomsPopulated(true);
     }
   }, [rooms]);
+
+  // Test for new room loading
+  console.log('selected room: ', selectedRoom);
 
   return (
     <div className="page">
