@@ -39,8 +39,7 @@ userController.createUser = async (req, res, next) => {
 // verification middleware to login
 userController.verifyUser = async (req, res, next) => {
   // destructure username and password from req.body
-  const { username } = req.params;
-  const { password } = req.body;
+  const { username, password } = req.body;
   // console.log(username, password);
   if (!username || !password) {
     throw new Error('Username or password not provided');

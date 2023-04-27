@@ -40,7 +40,7 @@ router.post(
 
 //login
 router.post(
-  '/login/:username',
+  '/login',
   userController.verifyUser,
   cookieController.setSSIDCookie,
   sessionController.startSession,
