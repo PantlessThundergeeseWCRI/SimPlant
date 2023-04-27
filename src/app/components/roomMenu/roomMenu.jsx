@@ -47,7 +47,7 @@ export default function RoomMenu(props) {
           return <option value={room.room_name}>{room.room_name}</option>
         })}
       </select>
-      <h2>{selectedRoom}: {lightLevel} light, {humidityLevel} humidity, {temperature} temperature </h2>
+      <h2>{selectedRoom}: {humidityLevel} humidity, {lightLevel} light, {temperature} temperature </h2>
       </div>
     </nav>
   );
