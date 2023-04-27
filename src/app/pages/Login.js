@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom'
 import { GoogleLogin } from '@react-oauth/google';
 import jwt_decode from "jwt-decode";
@@ -28,7 +28,7 @@ export default function Login(props) {
     // if result is true (verified user), set loggedIn to true
     if (result) {
       props.setLoggedIn(true);
-      props.setUser(username);
+      props.setUser(username.current.value);
     }
   }
 
