@@ -4,7 +4,7 @@ import Checkbox from './Checkbox';
 import './formContainerStyle.scss';
 
 export default function FormContainer(props) {
-  const { user, roomName, rooms, setRooms } = props;
+  const { user, roomName, rooms, setRooms, setSelectedRoom } = props;
   const days = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"];
   console.log('rooms', rooms);
   console.log('room name', roomName);
@@ -34,6 +34,7 @@ export default function FormContainer(props) {
 
     // Reload rooms
     setRooms(rooms.concat([newRoomBody]));
+    setSelectedRoom(newRoomBody.room_name);
     };
   
 
