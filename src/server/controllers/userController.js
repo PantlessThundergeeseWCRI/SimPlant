@@ -1,10 +1,10 @@
-const model = require('../model.js');
-const ObjectId = require('mongodb').ObjectId;
-const bcrypt = require('bcrypt.js');
+const model = require('../userModel.js');
+// const ObjectId = require('mongodb').ObjectId;
+const bcrypt = require('bcryptjs');
 
 const userController = {};
 //authentication/creating user
-userController.createUser = (req, res, next) => {
+userController.createUser = async (req, res, next) => {
   const { username, password } = req.body;
   // console.log('user', req.body);
   if (!username || !password) {
@@ -13,55 +13,59 @@ userController.createUser = (req, res, next) => {
       message: { err: 'No username or password entered' },
     });
   }
-  // check if username is unique
-  model.User.find({ username })
-    .exec()
-    .then(user => {
-      if (user.length) {
-        console.log('user info received from db: ', user);
-        return next({
-          log: 'userController.createUser',
-          message: {
-            err: 'User already exists, enter a different username',
-          },
-        });
-      }
-      // if username is unique, add new user to db
-      model.User.create({ username, password }).then(result => {
-        // store userId in response sent back
-        // res.locals.account = result; => result is the created user object/doc as json
-        res.locals.userId = result._id;
-        return next();
-      });
-    })
-    .catch(err =>
-      next({
-        log: `userController.createUser: ${err}`,
-        message: { err: `Error creating user:${err}` },
-      })
-    );
+  try {
+    const user = await model.User.findOne({ username });
+    if (user) {
+      throw new Error('User already exists');
+    }
+    //generate salt
+    const salt = bcrypt.genSaltSync(10);
+    //generate hash
+    const hash = await bcrypt.hash(password, salt);
+    //create new user with given username and newly generated hash password
+    const newUser = await model.User.create({ username, password: hash });
+    console.log('new user just created with hash password: ', newUser);
+    // res.locals.userID = newUser._id;
+    res.locals.username = newUser.username;
+    return next();
+  } catch (err) {
+    return next({
+      log: `userController.createUser: ${err}`,
+      message: { err: `Error creating user:${err}` },
+    });
+  }
 };
 
 // verification middleware to login
-userController.verifyUser = (req, res, next) => {
-  // const { username, password } = req.body;
-  const id = req.params.id;
-  User.find({ _id: new ObjectId(`${id}`) })
-    .exec()
-    .then(user => {
-      if (user[0].password === password) {
-        // pass down user id ('_id' in each user doc) back as userId
-        console.log(user);
-        res.locals.userId = user[0]._id;
-        return next();
-      }
-    })
-    .catch(err =>
-      next({
-        log: `userController.verifyUser: ${err}`,
-        message: { err: 'Error verifying user' },
-      })
-    );
+userController.verifyUser = async (req, res, next) => {
+  // destructure username and password from req.body
+  const { username } = req.params;
+  const { password } = req.body;
+  // console.log(username, password);
+  if (!username || !password) {
+    throw new Error('Username or password not provided');
+  }
+  //query for user in db with username and password
+  try {
+    const user = await model.User.findOne({ username });
+    //if not found, throw error
+    if (!user) {
+      throw new Error('user not found');
+    }
+    console.log('user: ', user);
+    const loggedIn = bcrypt.compare(user.password, password);
+    if (!loggedIn) {
+      throw new Error('incorrect password');
+    }
+    //res.locals.userId = user._id
+    res.locals.username = user.username;
+    return next();
+  } catch (err) {
+    return next({
+      log: `userController.verifyUser: ${err}`,
+      message: { err: `Error verifying user: ${err}` },
+    });
+  }
 };
 
 // get all data about a user
