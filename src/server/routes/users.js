@@ -55,7 +55,7 @@ router.delete(
   sessionController.endSession,
   cookieController.destroySSIDCookie,
   (req, res) => {
-    res.status(204).send('user logged out');
+    res.status(204).send('user logged out'); // the message does not show up for a 204 status
   }
 );
 

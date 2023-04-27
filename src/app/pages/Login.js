@@ -9,26 +9,27 @@ export default function Login(props) {
   const password = useRef();
   
   const userLogin = async credentials => {
-    console.log('username: ', username.current.value);
-    console.log('password: ', password.current.value);
     // fetch call to validate user
-    // const data = await fetch('http://localhost:3000/users/login', {
-    //     method: 'POST',
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify(credentials)
-    // })
-    // return data;
+    const data = await fetch('http://localhost:3000/users/login', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(credentials)
+    })
+    return data.ok;
   }
   
   const handleClick = async () => {
     const result = await userLogin({
-        username,
-        password
+        username: username.current.value,
+        password: password.current.value
     });
     // if result is true (verified user), set loggedIn to true
-    // props.setLoggedIn(true);
+    if (result) {
+      props.setLoggedIn(true);
+      props.setUser(username);
+    }
   }
 
   return (

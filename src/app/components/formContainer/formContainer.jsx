@@ -1,9 +1,11 @@
 import React from 'react';
 import FormSelect from './FormSelect';
+import Checkbox from './Checkbox';
 import './formContainerStyle.scss';
 
 export default function FormContainer(props) {
-  const { user, roomName, rooms, setRooms, setSelectedRoom } = props;
+  const { user, roomName, rooms, setRooms, selectedRoom, setSelectedRoom } = props;
+  const days = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"];
   console.log('rooms', rooms);
   console.log('room name', roomName);
   // On submit, send a POST request to the server with the form data
@@ -57,7 +59,7 @@ export default function FormContainer(props) {
       monday: data.get('Mon') ? true : false,
       tuesday: data.get('Tue') ? true : false,
       wednesday: data.get('Wed') ? true : false,
-      thursday: data.get('Thu') ? true : false,
+      thursday: data.get('Thur') ? true : false,
       friday: data.get('Fri') ? true : false,
       saturday: data.get('Sat') ? true : false,
       sunday: data.get('Sun') ? true : false
@@ -88,6 +90,11 @@ export default function FormContainer(props) {
 
   };
 
+  // When a room is selected, set selectedRoom in state
+  const handleSelection = (event) => {
+    setSelectedRoom(event.target.value);
+  };
+
   return (
     <div className="formContainer">
       <form className="roomForm" onSubmit={handleRoomSubmit}>
@@ -114,37 +121,17 @@ export default function FormContainer(props) {
         <FormSelect name="plantLighting" property="Lighting"/>
         <FormSelect name="plantTemperature" property="Temperature"/>
         <FormSelect name="plantHumidity" property="Humidity"/>
-        <FormSelect name="plantWatering" property="Watering"/>
+        <p><u>Please select your watering schedule</u></p>
         <div className="schedule">
-          <div>
-            <label htmlFor="Mon">Mon</label>
-            <input type="checkbox" id="Mon" name="Mon" value="Mon"></input>
-          </div>
-          <div>
-            <label htmlFor="Tue">Tue</label>
-            <input type="checkbox" id="Tue" name="Tue" value="Tue"></input>
-          </div>
-          <div>
-            <label htmlFor="Wed">Wed</label>
-            <input type="checkbox" id="Wed" name="Wed" value="Wed"></input>
-          </div>
-          <div>
-            <label htmlFor="Thur">Thur</label>
-            <input type="checkbox" id="Thur" name="Thur" value="Thur"></input>
-          </div>
-          <div>
-            <label htmlFor="Fri">Fri</label>
-            <input type="checkbox" id="Fri" name="Fri" value="Fri"></input>
-          </div>
-          <div>
-            <label htmlFor="Sat">Sat</label>
-            <input type="checkbox" id="Sat" name="Sat" value="Sat"></input>
-          </div>
-          <div>
-            <label htmlFor="Sun">Sun</label>
-            <input type="checkbox" id="Sun" name="Sun" value="Sun"></input>
-          </div>
+          {days.map(day => {
+            return <Checkbox day={day} />
+          })}
         </div>
+        <select name="plant-rooms" value={selectedRoom} onChange={handleSelection}>
+          {rooms.map((room) => {
+            return <option value={room.room_name}>{room.room_name}</option>
+          })}
+        </select>
         <button type="submit">Submit</button>
       </form>
     </div>

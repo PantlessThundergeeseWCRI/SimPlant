@@ -108,7 +108,6 @@ plantController.deletePlant = async (req, res, next) => {
       console.log(rooms);
       return rooms.room_name === room_name;
     });
-    console.log(currentRoom);
     if (!currentRoom) {
       throw new Error('Room not found');
     }
@@ -118,7 +117,6 @@ plantController.deletePlant = async (req, res, next) => {
     if (!currentPlant) {
       throw new Error('Plant not found');
     }
-    console.log('species: ', species);
     const result = await model.User.updateOne(
       { username, 'rooms.room_name': room_name },
       { $pull: { 'rooms.$.plants': { species: species } } }

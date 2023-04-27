@@ -11,8 +11,8 @@ export default function LowerContainer(props) {
 
   return (
     <div className="lowerContainer">
-      <FormContainer user={props.user} rooms={rooms} roomName={selectedRoom} setSelectedRoom={setSelectedRoom} setRooms={setRooms}/>
-      <Room roomInfo={roomInfo}/>
+      <FormContainer user={props.user} rooms={rooms} roomName={selectedRoom} selectedRoom={selectedRoom} setSelectedRoom={setSelectedRoom} setRooms={setRooms}/>
+      <Room user={props.user} roomInfo={roomInfo}/>
     </div>
   );
 }
