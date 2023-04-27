@@ -39,9 +39,9 @@ export default function Room(props) {
   }, [roomInfo]);
 
   // TODO fetch plants from database
-  // React.useEffect(() => {
-  //   setPlants([plant1, plant2, plant3]);
-  // }, []);
+  React.useEffect(() => {
+    setPlants([plant1, plant2, plant3]);
+  }, []);
 
   // TODO add key prop to Plant components
   return (

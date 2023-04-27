@@ -5,6 +5,7 @@ const app = express();
 const cors = require('cors');
 //require routers
 const usersRouter = require('./routes/users.js');
+const userController = require('../server/controllers/userController.js')
 require('dotenv').config();
 
 app.use(cors());
@@ -12,17 +13,25 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
+
 app.use('/users', usersRouter);
 
-// create a new user
-// app.post('/user', userController.createUser, (req, res) => {
-//   res.status(200).redirect('http/localhost:8000/app');
-// });
 // app.get('/')
-app.get('/', (req, res) => {
 
-  res.send('hello world');
+
+//signup
+// app.post('/signup', userController.createUser, (req, res) =>{
+//   res.status(200).send('New user created')
+// })
+
+
+app.get('/', (req, res) => {
+  //is this how we serve the html file for frontend???
+  // res.sendFile(path.resolve(__dirname, '../public/index.html')); 
+  res.send('hello world')
 });
+
+
 
 //local error handler
 app.use((req, res) => {
@@ -39,6 +48,7 @@ app.use((err, req, res, next) => {
   const errorObj = Object.assign(defaultErr, err);
   console.log('ERROR: ', errorObj.log);
   const errorStatus = err.status || 500;
+  
   return res.status(errorObj.status).json(errorObj.message);
 });
 
