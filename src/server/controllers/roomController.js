@@ -1,4 +1,4 @@
-const model = require('../model.js');
+const model = require('../userModel.js');
 
 const roomController = {};
 roomController.addRoom = async (req, res, next) => {
