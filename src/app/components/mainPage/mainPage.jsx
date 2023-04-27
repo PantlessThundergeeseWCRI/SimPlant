@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useReducer } from 'react';
 import './mainPageStyle.scss';
 import RoomMenu from '../roomMenu/roomMenu.jsx';
 import LowerContainer from '../lowerContainer/lowerContainer.jsx';

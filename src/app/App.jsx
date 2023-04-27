@@ -14,14 +14,16 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/"  element={
+        <Route 
+          path="/"  
+          element={
           // (() => {
           //   // if user is not logged in, load Login component to require login
           //   if (!loggedIn) {
           //     return (
           //       <>
           //         <Header />
-          //         <Login setLoggedIn={setLoggedIn} />
+          //         <Login setLoggedIn={setLoggedIn} setUser={setUser}/>
           //       </>
           //     )
           //   } else {
@@ -29,20 +31,20 @@ function App() {
           //     return (
           //       <div id="app">
           //         <Header />
-          //         <MainPage />
+          //         <MainPage user={user} />
           //       </div>
           //     );
           //   }
           // })()
           <div id="app">
             <Header />
-            <MainPage user={user}/>
+            <MainPage user={user} />
           </div>
         } />
         <Route path="/signup" element={
           <>
             <Header />
-            <Signup />
+            <Signup setLoggedIn={setLoggedIn} setUser={setUser} />
           </>
         } />
       </Routes>
