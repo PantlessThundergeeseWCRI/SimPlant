@@ -105,8 +105,11 @@ plantController.deletePlant = async (req, res, next) => {
     }
     //find room with corresponding currentUser with room_name
     const currentRoom = currentUser.rooms.find(
-      rooms => rooms.room_name === room_name
+      rooms => {
+        console.log(rooms)
+        return rooms.room_name === room_name}
     );
+    console.log(currentRoom)
     if (!currentRoom) {
       throw new Error('Room not found');
     }
@@ -116,8 +119,9 @@ plantController.deletePlant = async (req, res, next) => {
     if (!currentPlant) {
       throw new Error('Plant not found');
     }
+    console.log('species: ', species)
     const result = await model.User.updateOne(
-      { username, room_name },
+      { username, 'rooms.room_name': room_name },
       { $pull: { 'rooms.$.plants': { species: species } } }
     );
     if (!result) {
