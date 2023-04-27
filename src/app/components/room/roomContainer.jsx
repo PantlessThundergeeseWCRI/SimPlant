@@ -28,7 +28,7 @@ const testPlants = [plant1, plant2, plant3];
 
 export default function Room(props) {
   const { roomInfo } = props;
-  console.log('roomInfo', roomInfo);
+  console.log('roomInfo in roomContainer: ', roomInfo);
   
   // Hook to set plants array
   const [plants, setPlants] = React.useState([testPlants]);
@@ -37,6 +37,21 @@ export default function Room(props) {
     if (!roomInfo) return;
     setPlants(roomInfo.plants);
   }, [roomInfo]);
+
+  // delete plant from database upon clicking remove button
+  const deletePlant = (username, room_name, species) => {
+    fetch('http://localhost:3000/users/plant/delete', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username,
+        room_name,
+        species
+      })
+    })
+  }
 
   // TODO fetch plants from database
   // React.useEffect(() => {
@@ -47,7 +62,7 @@ export default function Room(props) {
   return (
     <div id="roomContainer">
       {plants.map((plant) => {
-        return <Plant plant={plant}/>
+        return <Plant plant={plant} deletePlant={deletePlant} roomInfo={roomInfo} />
       })}
     </div>
   );
