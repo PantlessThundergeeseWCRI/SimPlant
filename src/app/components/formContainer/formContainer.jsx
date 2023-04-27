@@ -35,6 +35,8 @@ export default function FormContainer(props) {
 
     // Reload rooms
     setRooms(rooms.concat([newRoomBody]));
+    
+    // Set selected room to newly created room
     setSelectedRoom(newRoomBody.room_name);
     };
   
@@ -83,6 +85,7 @@ export default function FormContainer(props) {
 
     // Update rooms state
     setRooms(newRooms);
+
   };
 
   return (
