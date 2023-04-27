@@ -1,4 +1,4 @@
-const model = require('./model.js');
+const model = require('../../src/server/model.js');
 const ObjectId = require('mongodb').ObjectId;
 
 const userController = {};

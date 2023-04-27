@@ -1,5 +1,6 @@
 const model = require('../model.js');
 const ObjectId = require('mongodb').ObjectId;
+const bcrypt = require('bcrypt.js');
 
 const userController = {};
 //authentication/creating user

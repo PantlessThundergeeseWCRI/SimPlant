@@ -17,6 +17,17 @@ app.use('/users', usersRouter);
 // app.post('/user', userController.createUser, (req, res) => {
 //   res.status(200).redirect('http/localhost:8000/app');
 // });
+
+//create a new user
+router.post('/createUser', userController.createUser, (req, res) => {
+  return res.status(201).json(res.locals.username);
+});
+
+// //login
+router.post('/login', userController.verifyUser, (req, res) => {
+  res.status(200).json(res.locals.username);
+});
+
 // app.get('/')
 app.get('/', (req, res) => {
   res.send('hello world');
