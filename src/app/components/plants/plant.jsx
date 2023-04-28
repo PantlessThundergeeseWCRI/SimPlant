@@ -4,7 +4,6 @@ import './plantStyle.scss'
 // TODO watering frequency per week? 
 
 const Plant = (props) => {
-  console.log('props', props);
   let { species, 
           humidity, 
           lighting, 
@@ -27,7 +26,6 @@ const Plant = (props) => {
   // If plant needs to be watered today, add (water today) to the end of the string
   // Get today's day of the week (eg. 'Monday')
   const today = new Date().toLocaleDateString('en-US', { weekday: 'long' }).toLowerCase();
-  console.log('props.plant[today]', props.plant[today]);
   wateringStr = "Water on: " + wateringStr;
   if (props.plant[today]) wateringStr = ' WATER TODAY!';
 
@@ -54,10 +52,10 @@ const Plant = (props) => {
 
   // Add indicator emojis to each plant property
   lighting+=emojis[0];
-  humidity+=emojis[1];
-  temperature+=emojis[2];
+  temperature+=emojis[1];
+  humidity+=emojis[2];
+  
 
-  console.log('emojis', emojis);
   return(
     <div className='plant'>
       <p className="species">Species: {species}</p>

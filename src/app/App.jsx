@@ -30,12 +30,13 @@ function App() {
               // if user is logged in, display homepage
               return (
                 <div id="app">
-                  <Header />
+                  <Header user={user} setLoggedIn={setLoggedIn}/>
                   <MainPage user={user} />
                 </div>
               );
             }
           })()
+          // to bypass login pass:
           // <div id="app">
           //   <Header />
           //   <MainPage user={user} />

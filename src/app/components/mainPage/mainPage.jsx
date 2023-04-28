@@ -43,11 +43,9 @@ function MainPage(props) {
   }, [rooms]);
 
   // Test for new room loading
-  console.log('selected room: ', selectedRoom);
 
   return (
     <div className="page">
-      {console.log('selectedRoom in return: ', selectedRoom)}
       <RoomMenu rooms={rooms} selectedRoom={selectedRoom} setSelectedRoom={setSelectedRoom} />
       <LowerContainer user={user} rooms={rooms} selectedRoom={selectedRoom} setSelectedRoom={setSelectedRoom} setRooms={setRooms}/>
     </div>

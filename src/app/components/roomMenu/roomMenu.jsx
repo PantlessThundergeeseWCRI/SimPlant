@@ -13,9 +13,6 @@ export default function RoomMenu(props) {
 
   // Get lighting and humidity levels from selected room
   if (selectedRoom) {
-    console.log(rooms);
-    console.log('room.room_name: ', rooms[0].room_name);
-    console.log('selectedRoom: ', selectedRoom);
     lightLevel = rooms.find((room) => room.room_name === selectedRoom).lighting;
     humidityLevel = rooms.find((room) => room.room_name === selectedRoom).humidity;
     temperature = rooms.find((room) => room.room_name === selectedRoom).temperature;

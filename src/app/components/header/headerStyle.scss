@@ -5,9 +5,7 @@
 }
 
 h1 {
-  display: block;
   margin: auto;
-  background-color: $darkPrimary;
   color: $primaryWhite;
   font-size: 4rem;
   text-align: center;
@@ -15,5 +13,23 @@ h1 {
 }
 
 header {
-  background-color: $midPrimary;
+  background-color: $darkPrimary;
+
+  a {
+    text-decoration: none;
+  }
+
+  nav {
+    position: absolute;
+    right: 40px;
+    top: 20px;
+    color: white;
+  }
+}
+
+.logout {
+  font-size: 1.5rem;
+  color: white;
+  background-color: none;
+  text-decoration: none;
 }
