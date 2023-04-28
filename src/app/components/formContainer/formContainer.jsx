@@ -6,8 +6,6 @@ import './formContainerStyle.scss';
 export default function FormContainer(props) {
   const { user, roomName, rooms, setRooms, selectedRoom, setSelectedRoom } = props;
   const days = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"];
-  console.log('rooms', rooms);
-  console.log('room name', roomName);
   // On submit, send a POST request to the server with the form data
   const handleRoomSubmit = async (event) => {
     event.preventDefault();

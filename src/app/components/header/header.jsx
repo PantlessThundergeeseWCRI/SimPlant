@@ -6,7 +6,7 @@ function Header() {
     <header id="header">
       <h1>SimPlant</h1>
       <nav>
-        
+        Logout
       </nav>
     </header>
   );

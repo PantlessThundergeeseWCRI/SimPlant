@@ -4,7 +4,6 @@ import Plant from '../plants/plant.jsx';
 
 export default function Room(props) {
   const { user, roomInfo } = props;
-  console.log('roomInfo in roomContainer: ', roomInfo);
 
   // Hook to set plants array
   const [plants, setPlants] = React.useState([]);
