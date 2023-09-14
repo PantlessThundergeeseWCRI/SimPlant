@@ -9,7 +9,9 @@
 }
 
 .plant {
-  height: 255px;
+  position: relative;
+  height: auto;
+  max-height: 350px;
   width: 170px;
   background-color: $lightPrimary;
   padding: 5px;
@@ -17,6 +19,19 @@
   border-radius: $borderRadius;
   text-align: center;
   box-shadow: 0 2px 8px 1px $shadow;
+
+  button {
+    width: auto;
+    padding: 6px 8px;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translate(-67%);
+  }
+
+  button:hover {
+    background-color: red;
+  }
 }
 
 .plant-img {

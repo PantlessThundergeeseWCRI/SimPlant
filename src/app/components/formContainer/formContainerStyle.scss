@@ -43,6 +43,10 @@
   width: 100%;
   font-family: 'Vegur';
   box-shadow: 0 2px 8px 1px $shadow;
+
+  select:last-of-type {
+    width: 8rem;
+  }
 }
 
 select {
@@ -64,4 +68,15 @@ input {
 .formTitle {
   font-size: 1.5rem;
   margin-bottom: 1rem;
+}
+
+.schedule {
+  display: flex;
+  gap: 1rem;
+
+  div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
 }
