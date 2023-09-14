@@ -31,10 +31,12 @@ npm run dev
 ## 💪 Features
 
 - Log in or sign up by creating an account or through Google OAuth
-- Allow user to create new rooms for tracking lighting, temeperature, and humidity levels
-- Allow user to add new plants by specifying their lighting, temeperature, and humidity needs and watering schedule.
-- Displays all plants in a selected room with statistics.
+- Allow users to create new rooms for tracking lighting, temperature, and humidity levels
+- Allow users to add new plants by specifying their lighting, temperature, and humidity needs and watering schedule
+- Displays all plants in a selected room with statistics
+  
+![Screenshot 2023-09-13 at 5 37 21 PM](https://github.com/PantlessThundergeeseWCRI/SimPlant/assets/26369040/f7d43f3c-6cd8-41fa-9fda-e60d59f10ce7)
 
 ## 🤝 Contributing
 
-Better Weather welcomes all contributions, issues, and feature requests!
+SimPlant welcomes all contributions, issues, and feature requests!
